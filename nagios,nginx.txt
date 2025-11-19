@@ -1,0 +1,54 @@
+# 1. Pull Nagios image
+docker pull jasonrivers/nagios:latest
+
+# 2. Run Nagios container
+docker run --name nagiosdemo -d -p 8888:80 jasonrivers/nagios:latest
+
+# 3. Check it is running
+docker ps
+
+# 4. Open browser → http://localhost:8888
+#    Username: nagiosadmin
+#    Password: nagios
+
+# 5. Take these screenshots inside Nagios:
+#    - Login page
+#    - Dashboard (Tactical Overview)
+#    - Hosts → localhost
+#    - Services list
+
+
+
+
+
+
+
+
+# 1. Start Minikube (use docker driver – works on every laptop)
+minikube start --driver=docker
+
+# 2. Check status (screenshot this)
+minikube status
+
+# 3. Create Nginx deployment
+kubectl create deployment mynginx --image=nginx
+
+# 4. Check deployment & pods (screenshot)
+kubectl get deployments
+kubectl get pods
+
+# 5. Expose it
+kubectl expose deployment mynginx --type=NodePort --port=80
+
+# 6. Scale to 4 pods (screenshot the result)
+kubectl scale deployment mynginx --replicas=4
+kubectl get pods -o wide
+
+# 7. Get the URL (this is the magic command)
+minikube service mynginx --url
+
+# 8. It will show something like http://192.168.49.2:3XXXX
+#    Open that URL in browser → You will see NGINX WELCOME PAGE (screenshot this)
+
+# 9. Open Kubernetes Dashboard (bonus marks)
+minikube dashboard
