@@ -90,8 +90,101 @@ spec:
 kubectl apply -f mysql-deployment.yaml
 kubectl apply -f mysql-service.yaml
 
+
+
+
+
+Functional and Non-Functional Requirements of an E-Ticketing System
+The requirements for an E-Ticketing System are categorized into Functional (what it does) and Non-Functional (how well it performs).
+
+I. Functional Requirements (What the System Does)
+User Management:
+
+Secure user registration, login, and profile management for customers and administrators.
+
+Role-Based Access Control (RBAC) to restrict features based on user type (e.g., customer, organizer, validation staff).
+
+Event/Service Management:
+
+Ability for organizers to create, edit, publish, and schedule events (including capacity, dates, and venue).
+
+Support for multiple ticket types, pricing tiers, and promotional codes/discounts.
+
+Ticket Booking & Sales:
+
+Real-time search and filtering capability based on criteria (date, location, category).
+
+Real-time display of ticket/seat availability to prevent overbooking.
+
+Secure checkout and integration with multiple online payment gateways.
+
+Temporary reservation/hold functionality during the payment process.
+
+E-Ticket Generation and Delivery:
+
+Automatic generation of unique, secure electronic tickets (PDF, mobile) upon successful payment.
+
+Tickets must include a unique identifier (QR code or barcode) for validation.
+
+Instant delivery of tickets via email, SMS, or mobile application access.
+
+Validation and Entry:
+
+Ability for staff to scan the e-ticket QR code/barcode using a dedicated mobile application or device.
+
+Instant verification of ticket validity, checking against fraud, cancellation, or prior usage.
+
+Administrative Functions:
+
+Processing of ticket cancellations, modifications, and refunds according to defined policies.
+
+Generation of detailed sales reports, revenue summaries, and attendance tracking reports.
+
+II. Non-Functional Requirements (How Well the System Performs)
+Performance:
+
+Response Time: Critical actions (search, booking, payment) must complete quickly (e.g., under 3 seconds).
+
+Throughput: The system must handle high volumes of concurrent users and transactions, especially during peak sales periods (e.g., 5,000 bookings per minute).
+
+Scalability:
+
+The architecture must be scalable to accommodate sudden, significant increases in user traffic (e.g., handling a major event sale).
+
+Security:
+
+Data Protection: All customer and payment data must be encrypted (in transit and at rest).
+
+Compliance: Must adhere to regulatory standards like PCI DSS for payment handling.
+
+Access Control: Robust mechanisms for preventing unauthorized access and detecting fraudulent activity.
+
+Reliability:
+
+Availability (Uptime): The system must target high availability (e.g., 99.9% uptime) to minimize lost revenue from downtime.
+
+Fault Tolerance: The system must gracefully handle hardware or software failures with minimal service interruption.
+
+Usability:
+
+User Interface (UI): The booking interface must be intuitive and easy for customers to navigate.
+
+Mobile Compatibility: The entire system (customer interface and staff validation app) must be fully functional and optimized for mobile devices.
+
+Maintainability:
+
+The codebase should be well-documented and modular to allow for easy updates, bug fixes, and feature additions without extensive redevelopment
 kubectl scale deployment/mysql-deployment --replicas=5
 
 kubectl get deployments
 kubectl get pods
+
+
+
+
+
+
+
+
+Use Case Diagram for E-Ticketing SystemA Use Case Diagram illustrates the high-level functional requirements of the system and how different users (Actors) interact with those functions (Use Cases).Actors:Customer: The end-user who purchases tickets.Validation Staff: The employee responsible for checking tickets at the venue.Event Organizer: The entity that manages and sells tickets for events.System Administrator: The user who manages the core system settings, reports, and user accounts.Use Cases:Use CaseDescriptionSearch Event/ServiceCustomer browses or searches for available events/services.View Event DetailsCustomer views information, dates, and ticket prices for an event.Select Ticket/SeatCustomer selects the desired type and quantity of tickets or specific seats.Make PaymentCustomer completes the transaction securely via a payment gateway.Generate E-TicketThe system automatically creates a unique digital ticket with a scannable code.View Past BookingsCustomer accesses their purchase history and ticket details.Validate TicketValidation Staff scans the E-Ticket to verify its authenticity for entry.Manage EventsEvent Organizer creates, updates, and sets pricing/capacity for events.View Sales ReportsEvent Organizer views performance metrics and sales data.Manage User AccountsSystem Administrator creates/modifies accounts and permissions.
 
