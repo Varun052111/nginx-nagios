@@ -35,3 +35,63 @@ pipeline {
 
 
 }
+
+
+
+
+docker pull mysql:latest
+my sql deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+spec:
+  replicas: 3  # Initial number of replicas
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:latest
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "rootpassword"  # Set the MySQL root password
+        ports:
+        - containerPort: 3306
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: "1"
+          requests:
+            memory: "1Gi"
+            cpu: "0.5"
+
+mysql-service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+spec:
+  selector:
+    app: mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+  clusterIP: None  # This makes it a headless service for stateful access
+
+
+kubectl apply -f mysql-deployment.yaml
+kubectl apply -f mysql-service.yaml
+
+kubectl scale deployment/mysql-deployment --replicas=5
+
+kubectl get deployments
+kubectl get pods
+
