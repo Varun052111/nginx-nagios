@@ -1,3 +1,37 @@
 the jenkinhs webhook test
 other changes made to test email
 pramoad asshole
+
+pipeline {
+    agent any
+    tools {
+        maven "MAVEN_HOME"
+    }
+    stages{
+        stage("git repo and clean"){
+            steps{
+                deleteDir()
+                echo "Cloning repo....."
+                bat "git clone https://github.com/ssvkotamraju/E-ticketing.git"
+                bat "mvn clean -f E-ticketing"
+            }
+        }
+        stage("install"){
+            steps{
+                bat "mvn install -f E-ticketing"
+            }
+        }
+        stage("test"){
+            steps{
+                bat "mvn test -f E-ticketing"
+            }
+        }
+        stage("Deploy"){
+            steps{
+                bat "mvn package -f E-ticketing"
+            }
+        }
+    }
+
+
+}
